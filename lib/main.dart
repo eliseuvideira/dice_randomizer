@@ -40,29 +40,31 @@ class _DicePageState extends State<DicePage> {
     });
   }
 
+  Widget _buildDice(int number) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Image.asset('images/dice$number.png'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: FlatButton(
-                child: Image.asset('images/dice$left.png'),
-                onPressed: () {
-                  _randomize();
-                },
-              ),
-            ),
-            Expanded(
-              child: FlatButton(
-                child: Image.asset('images/dice$right.png'),
-                onPressed: () {
-                  _randomize();
-                },
-              ),
-            ),
-          ],
+    return GestureDetector(
+      onTap: () {
+        print('detected');
+        _randomize();
+      },
+      child: Container(
+        child: Center(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              _buildDice(left),
+              _buildDice(right),
+            ],
+          ),
         ),
       ),
     );
